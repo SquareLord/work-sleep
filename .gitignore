@@ -1,0 +1,53 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Build/dist artifacts
+build/
+dist/
+.eggs/
+*.egg-info/
+.wheels/
+
+# Test/coverage caches
+.pytest_cache/
+.tox/
+.nox/
+.coverage*
+htmlcov/
+
+# Type checkers / linters
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Editors/IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Databases and local state
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs and pids
+*.log
+*.pid
+logs/
+
+# Project-specific generated data
+captures/
+
+# Local configuration (add back if you want it tracked)
+preferences.json

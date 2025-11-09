@@ -1,4 +1,4 @@
-# Study Sleep - Architecture Overview
+# Work Sleep - Architecture Overview
 
 ## System Components
 
@@ -8,10 +8,9 @@
 - Thread-safe frame retrieval
 
 ### 2. Drowsiness Detector (`drowsiness_detector.py`)
-- Uses MediaPipe for pose and face detection
-- **Slouching Detection**: Calculates shoulder angle deviation from reference
-- **Eye Closure Detection**: Uses Eye Aspect Ratio (EAR) to detect closed eyes
-- **Drowsiness Index**: Combines both metrics (0.0 = alert, 1.0 = very drowsy)
+- Uses MediaPipe (face mesh + pose) for landmarks
+- Computes 4 indices per frame: drowsiness (EAR vs baseline), slouching (shoulder angle deviation), attention (gaze/head deviation), yawn_score (recent yawns)
+- Returns indices + debug info to the main loop and break overlay
 
 ### 3. Preferences Manager (`preferences.py`)
 - Stores user preferences in JSON format
@@ -65,18 +64,18 @@
 
 ## Technical Details
 
-### Drowsiness Calculation
+### Core Index Formulas (Simplified)
 ```
-Slouching Score = |current_shoulder_angle - reference_angle| / 30°
-Eye Closure Score = max(0, (0.7 - current_EAR/reference_EAR) / 0.7)
-Drowsiness Index = (Slouching Score + Eye Closure Score) / 2
+slouching = clamp(|current_shoulder_angle - ref_angle| / 30, 0, 1)
+ear_ratio = current_EAR / ref_EAR
+drowsiness = clamp((0.7 - ear_ratio)/0.7, 0, 1) if ear_ratio < 0.7 else 0
+attention = weighted(gaze_offset, head_rotation, head_tilt)  # normalized 0..1
+yawn_score = scaled count of yawns in last 60s (3+ => 1.0)
 ```
 
 ### Break Duration Calculation
 ```
-base_duration = preferences.base_break_duration
-subject_multiplier = preferences.get_subject_tiredness(current_subject)
-adjusted_base = base_duration * subject_multiplier
-break_duration = adjusted_base + (max_duration - adjusted_base) * drowsiness_index
+weighted_score = sum(index[i] * weight[i])
+duration_seconds = scaler * weighted_score   # scaler learns (bounded)
 ```
 

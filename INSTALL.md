@@ -22,7 +22,7 @@ pip3 --version
 Navigate to the project directory and install the required packages:
 
 ```bash
-cd /home/abhiramk/Documents/hack-princeton/work-sleep
+cd /home/abhiramk/Documents/hack-princeton/study-sleep
 pip3 install -r requirements.txt
 ```
 

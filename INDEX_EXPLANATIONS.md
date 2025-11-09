@@ -1,8 +1,20 @@
-# Tiredness Detection Indices - Complete Guide
+# Tiredness Detection Indices - Legacy Guide
 
-## System Overview
+## Current System (Active Indices)
 
-The system uses **9 independent indices** to measure different aspects of tiredness and distraction. Each index is calibrated so that **1.0 represents definitive tiredness or distraction** - not just a theoretical maximum, but a clear indicator that intervention is needed.
+The live application now uses only 4 core indices:
+1. Drowsiness (EAR vs personal baseline)
+2. Slouching (shoulder angle deviation)
+3. Attention (gaze/head deviation weighting)
+4. Yawn Score (recent yawn count window)
+
+Weights learn per task; break duration = scaler × weighted_score.
+
+---
+
+## Legacy (Expanded) Indices (Historical Reference)
+
+Originally the system experimented with up to 9 indices for richer modeling. The remainder of this document is preserved for historical/experimental context.
 
 ---
 
@@ -24,7 +36,7 @@ The system uses **9 independent indices** to measure different aspects of tiredn
 
 ---
 
-## The 9 Indices Explained
+## The Legacy 9 Indices Explained
 
 ### 1. 👁️ **Eye Closure Index** (FIXED)
 **What it measures**: How closed your eyes are RIGHT NOW + recent prolonged closures

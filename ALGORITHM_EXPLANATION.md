@@ -1,8 +1,8 @@
-# How the Drowsiness Detection Algorithm Works
+# How the Drowsiness Detection Algorithm Works (Work Sleep)
 
 ## Overview
 
-This application uses **face and pose detection** (not facial recognition) to detect both **drowsiness** and **distraction**. It doesn't identify who you are—it analyzes your facial features, posture, and head orientation to determine if you're getting tired or not focused on your screen.
+This application (rebranded to Work Sleep) uses **face and pose detection** (not facial recognition) to detect both **drowsiness** and **distraction**. It does not identify who you are—it analyzes facial landmarks, posture, and head orientation to determine fatigue and focus.
 
 ## Technology Stack
 

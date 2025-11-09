@@ -1,17 +1,17 @@
-# Study Sleep - Drowsiness Detection & Break System
+# Work Sleep (formerly Study Sleep) - Drowsiness & Break System
 
-A hackathon project that monitors your posture and eye state to detect drowsiness and enforce breaks during study sessions.
+An adaptive desktop assistant that monitors posture and eyes to detect tiredness and enforce smart breaks during focused work or study sessions.
 
 ## Features
 
-- **Continuous Monitoring**: Captures images every few seconds via webcam
-- **Drowsiness Detection**: Analyzes slouching and eye closure compared to a reference image
-- **Smart Breaks**: Automatically enforces breaks based on drowsiness index and user preferences
-- **Input Blocking**: Overlays a timer and blocks all user input during breaks
+- Continuous monitoring via webcam (no identities stored)
+- 4 indices: drowsiness, slouching, attention, yawn score
+- Adaptive break timing: duration = scaler × weighted_score (learns over time)
+- Input blocking overlay with countdown and early-exit if you become alert
 
 ## Installation
 
-### Quick Setup
+### Quick Start
 
 Run the setup script:
 ```bash
@@ -39,17 +39,21 @@ chmod +x setup.sh
 ## Usage
 
 ```bash
-python main.py
+python3 main.py
 ```
 
-1. Start the application
-2. Capture a reference diagnostic image when you're alert and sitting properly
-3. The system will continuously monitor your posture and eye state
-4. When drowsiness is detected, breaks will be automatically enforced
+1. Start the app
+2. Capture a reference when you're alert and sitting properly
+3. The system monitors posture/eyes and computes 4 indices
+4. When the weighted score crosses threshold, a break overlay is triggered
+5. The scaler adapts per-task based on how quickly you recover during breaks
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.10+
 - Webcam
 - Linux/Windows/macOS
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
 
